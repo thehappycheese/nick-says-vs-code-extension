@@ -3,6 +3,10 @@
 	"displayName": "NickSays",
 	"description": "Align cursors by addingg spaces, and number cursors",
 	"publisher":"engineernick",
+	"repository": {
+		"url": "https://github.com/thehappycheese/nick-says-vs-code-extension"
+	},
+	"license": "MIT",
 	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.59.0"
