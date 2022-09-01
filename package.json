@@ -1,9 +1,9 @@
 {
   "name": "nicksays",
-	"displayName": "nick_says",
-	"description": "does what nick says",
+	"displayName": "NickSays",
+	"description": "Align cursors by addingg spaces, and number cursors",
 	"publisher":"thehappycheese",
-	"version": "0.0.2",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.59.0"
 	},
