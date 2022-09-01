@@ -2,7 +2,7 @@
   "name": "nicksays",
 	"displayName": "NickSays",
 	"description": "Align cursors by addingg spaces, and number cursors",
-	"publisher":"thehappycheese",
+	"publisher":"engineernick",
 	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.59.0"
