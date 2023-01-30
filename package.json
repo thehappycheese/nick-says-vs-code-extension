@@ -1,15 +1,15 @@
 {
-  "name": "nicksays",
-	"displayName": "NickSays",
-	"description": "Text editing commands such as 'align cursors by adding spaces'",
-	"publisher":"engineernick",
+	"name": "nicksays",
+	"displayName": "nick_says",
+	"description": "commands to align multiple selections using spaces, or replace selections with incrementing numbers",
+	"publisher": "thehappycheese",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/thehappycheese/nick-says-vs-code-extension"
 	},
 	"license": "MIT",
 	"icon": "main_icon.png",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"engines": {
 		"vscode": "^1.59.0"
 	},
@@ -17,19 +17,33 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:nicksays.number_cursors",
-		"onCommand:nicksays.space_align_cursors"
+		"onCommand:nicksays.number_cursors_from_zero",
+		"onCommand:nicksays.number_cursors_from_one",
+		"onCommand:nicksays.left_align_cursors_using_spaces",
+		"onCommand:nicksays.right_align_cursors_using_spaces"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "nicksays.number_cursors",
-				"title": "NickSays: Number Cursors"
+				"command": "nicksays.number_cursors_from_zero",
+				"title": "Number Cursors from Zero",
+				"category": "NickSays"
 			},
 			{
-				"command": "nicksays.space_align_cursors",
-				"title": "NickSays: Align Cursors By Adding Spaces"
+				"command": "nicksays.number_cursors_from_one",
+				"title": "Number Cursors from One",
+				"category": "NickSays"
+			},
+			{
+				"command": "nicksays.left_align_cursors_using_spaces",
+				"title": "Align Left Selections by Adding Spaces",
+				"category": "NickSays"
+			},
+			{
+				"command": "nicksays.right_align_cursors_using_spaces",
+				"title": "Align Right Selections by Adding Spaces",
+				"category": "NickSays"
 			}
 		]
 	},
