@@ -1,15 +1,15 @@
 {
 	"name": "nicksays",
-	"displayName": "nick_says",
-	"description": "commands to align multiple selections using spaces, or replace selections with incrementing numbers",
-	"publisher": "thehappycheese",
+	"displayName": "Multi-Cursor-Align",
+	"description": "align multi-selections using spaces, insert incrementing numbers at selections, seek and expand selections. Formally called 'nick_says'",
+	"publisher": "engineernick",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/thehappycheese/nick-says-vs-code-extension"
 	},
 	"license": "MIT",
 	"icon": "main_icon.png",
-	"version": "1.0.3",
+	"version": "1.1.0",
 	"engines": {
 		"vscode": "^1.59.0"
 	},
@@ -20,7 +20,9 @@
 		"onCommand:nicksays.number_cursors_from_zero",
 		"onCommand:nicksays.number_cursors_from_one",
 		"onCommand:nicksays.left_align_cursors_using_spaces",
-		"onCommand:nicksays.right_align_cursors_using_spaces"
+		"onCommand:nicksays.right_align_cursors_using_spaces",
+		"onCommand:nicksays.seek_to_next_occurrence",
+		"onCommand:nicksays.expand_to_next_occurrence"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -28,22 +30,32 @@
 			{
 				"command": "nicksays.number_cursors_from_zero",
 				"title": "Number Cursors from Zero",
-				"category": "NickSays"
+				"category": "Multi-Cursor-Align"
 			},
 			{
 				"command": "nicksays.number_cursors_from_one",
 				"title": "Number Cursors from One",
-				"category": "NickSays"
+				"category": "Multi-Cursor-Align"
 			},
 			{
 				"command": "nicksays.left_align_cursors_using_spaces",
 				"title": "Align Left Selections by Adding Spaces",
-				"category": "NickSays"
+				"category": "Multi-Cursor-Align"
 			},
 			{
 				"command": "nicksays.right_align_cursors_using_spaces",
 				"title": "Align Right Selections by Adding Spaces",
-				"category": "NickSays"
+				"category": "Multi-Cursor-Align"
+			},
+			{
+				"command": "nicksays.seek_to_next_occurrence",
+				"title": "Seek to Next Occurrence",
+				"category": "Multi-Cursor-Align"
+			},
+			{
+				"command": "nicksays.expand_to_next_occurrence",
+				"title": "Expand to Next Occurrence",
+				"category": "Multi-Cursor-Align"
 			}
 		]
 	},
