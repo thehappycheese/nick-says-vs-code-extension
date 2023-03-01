@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The commandId parameter must match the command field in package.json
 	let disposable_number_cursors_from_zero = vscode
 			.commands
-			.registerTextEditorCommand('nicksays.number_cursors_from_zero', (editor, edit, args) => {
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_zero', (editor, edit, args) => {
 		let num=0;
 		for (let selection of editor.selections){
 			edit.replace(selection,num.toString());
@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let disposable_number_cursors_from_one = vscode
 			.commands
-			.registerTextEditorCommand('nicksays.number_cursors_from_one', (editor, edit, args) => {
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_one', (editor, edit, args) => {
 		let num=1;
 		for (let selection of editor.selections){
 			edit.replace(selection,num.toString());
@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	let disposable_left_align_cursors_using_spaces = vscode
 			.commands
-			.registerTextEditorCommand('nicksays.left_align_cursors_using_spaces', (editor, edit, args) => {
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.left_align_cursors_using_spaces', (editor, edit, args) => {
 		let max_column=0;
 		for (let selection of editor.selections){
 			max_column = Math.max(max_column, get_column(editor, selection.start));
@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let disposable_right_align_cursors_using_spaces = vscode
 			.commands
-			.registerTextEditorCommand('nicksays.right_align_cursors_using_spaces', (editor, edit, args) => {
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.right_align_cursors_using_spaces', (editor, edit, args) => {
 		let max_column = 0;
 		let max_width  = 0;
 		for (let selection of editor.selections){
@@ -67,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let disposable_seek_to_next_occurrence = vscode
 			.commands
-			.registerTextEditorCommand('nicksays.seek_to_next_occurrence', async (editor, edit, args) => {
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.seek_to_next_occurrence', async (editor, edit, args) => {
 		
 		const search_string = await vscode.window.showInputBox({
 			placeHolder: "characters to search for",
@@ -82,7 +82,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let new_selections:vscode.Selection[] = [];
 		for (let selection of editor.selections){
 			let text_line = editor.document.lineAt(selection.end.line);
-			let offset = text_line.text.slice(selection.end.character).search(search_string);
+			let offset = text_line.text.slice(selection.end.character).indexOf(search_string);
 			let new_position:vscode.Position;
 			if (offset===-1){
 				new_position = editor.document.lineAt(selection.end.line).range.end;
@@ -98,7 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let disposable_expand_to_next_occurrence = vscode
 			.commands
-			.registerTextEditorCommand('nicksays.expand_to_next_occurrence', async (editor, edit, args) => {
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.expand_to_next_occurrence', async (editor, edit, args) => {
 		
 		const search_string = await vscode.window.showInputBox({
 			placeHolder: "characters to search for",
@@ -113,7 +113,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let new_selections:vscode.Selection[] = [];
 		for (let selection of editor.selections){
 			let text_line = editor.document.lineAt(selection.end.line);
-			let offset = text_line.text.slice(selection.end.character).search(search_string);
+			let offset = text_line.text.slice(selection.end.character).indexOf(search_string);
 			if (offset===-1){
 				new_selections.push(
 					new vscode.Selection(

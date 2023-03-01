@@ -1,10 +1,26 @@
 # Change Log
 
-All notable changes to the "Multi-Cursor-Align" extension will be documented in this file.
+All notable changes to the "Multi-Cursor-Align" extension will be documented in
+this file.
 
 ## [Unreleased]
 
 ...
+
+## [1.1.1] - 2023-03-01
+
+### Changed
+
+- Changed named again from `Multi-Cursor-Align` to `Multi-Cursor Tools`
+
+- Changed command prefixes to `Multi-Cursor` to avoid conflict with the word
+  "Align" when searching in the pallet.
+
+### Fixed
+
+- Search now works with some special characters that were causing errors.
+  Internally it now uses `String.indexOf` instead of `String.search`. The regex
+  behavior of `search` was not intended for this particular feature.
 
 ## [1.1.0] - 2023-02-28
 
@@ -15,9 +31,11 @@ All notable changes to the "Multi-Cursor-Align" extension will be documented in 
 ### Added
 
 - `nicksays.seek_to_next_occurrence`
-  - Seeks all cursors forward on the same line to the next occurrence of the specified string (or to the end of line if not found)
+  - Seeks all cursors forward on the same line to the next occurrence of the
+    specified string (or to the end of line if not found)
 - `nicksays.expand_to_next_occurrence`
-  - Expand the cursor forward on the same line to the next occurrence of the specified string (or to the end of line if not found).
+  - Expand the cursor forward on the same line to the next occurrence of the
+    specified string (or to the end of line if not found).
 
 ## [1.0.3] - 2023-01-30
 

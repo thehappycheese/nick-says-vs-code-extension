@@ -1,6 +1,6 @@
 {
 	"name": "nicksays",
-	"displayName": "Multi-Cursor-Align",
+	"displayName": "Multi-Cursor Tools",
 	"description": "align multi-selections using spaces, insert incrementing numbers at selections, seek and expand selections. Formally called 'nick_says'",
 	"publisher": "engineernick",
 	"repository": {
@@ -9,7 +9,7 @@
 	},
 	"license": "MIT",
 	"icon": "main_icon.png",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"engines": {
 		"vscode": "^1.59.0"
 	},
@@ -17,45 +17,45 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:nicksays.number_cursors_from_zero",
-		"onCommand:nicksays.number_cursors_from_one",
-		"onCommand:nicksays.left_align_cursors_using_spaces",
-		"onCommand:nicksays.right_align_cursors_using_spaces",
-		"onCommand:nicksays.seek_to_next_occurrence",
-		"onCommand:nicksays.expand_to_next_occurrence"
+		"onCommand:engineernick.multi-cursor-tools.number_cursors_from_zero",
+		"onCommand:engineernick.multi-cursor-tools.number_cursors_from_one",
+		"onCommand:engineernick.multi-cursor-tools.left_align_cursors_using_spaces",
+		"onCommand:engineernick.multi-cursor-tools.right_align_cursors_using_spaces",
+		"onCommand:engineernick.multi-cursor-tools.seek_to_next_occurrence",
+		"onCommand:engineernick.multi-cursor-tools.expand_to_next_occurrence"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "nicksays.number_cursors_from_zero",
+				"command": "engineernick.multi-cursor-tools.number_cursors_from_zero",
 				"title": "Number Cursors from Zero",
-				"category": "Multi-Cursor-Align"
+				"category": "Multi-Cursor"
 			},
 			{
-				"command": "nicksays.number_cursors_from_one",
+				"command": "engineernick.multi-cursor-tools.number_cursors_from_one",
 				"title": "Number Cursors from One",
-				"category": "Multi-Cursor-Align"
+				"category": "Multi-Cursor"
 			},
 			{
-				"command": "nicksays.left_align_cursors_using_spaces",
+				"command": "engineernick.multi-cursor-tools.left_align_cursors_using_spaces",
 				"title": "Align Left Selections by Adding Spaces",
-				"category": "Multi-Cursor-Align"
+				"category": "Multi-Cursor"
 			},
 			{
-				"command": "nicksays.right_align_cursors_using_spaces",
+				"command": "engineernick.multi-cursor-tools.right_align_cursors_using_spaces",
 				"title": "Align Right Selections by Adding Spaces",
-				"category": "Multi-Cursor-Align"
+				"category": "Multi-Cursor"
 			},
 			{
-				"command": "nicksays.seek_to_next_occurrence",
+				"command": "engineernick.multi-cursor-tools.seek_to_next_occurrence",
 				"title": "Seek to Next Occurrence",
-				"category": "Multi-Cursor-Align"
+				"category": "Multi-Cursor"
 			},
 			{
-				"command": "nicksays.expand_to_next_occurrence",
+				"command": "engineernick.multi-cursor-tools.expand_to_next_occurrence",
 				"title": "Expand to Next Occurrence",
-				"category": "Multi-Cursor-Align"
+				"category": "Multi-Cursor"
 			}
 		]
 	},
