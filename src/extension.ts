@@ -23,15 +23,19 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable_number_cursors_from_arbitrary = vscode
 			.commands
 			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary', (editor, edit, args) => {
-		let num= vscode.window.showInputBox({
+		vscode.window.showInputBox({
 			placeHolder: "1",
 			prompt: "Starting number",
 			value: 1
-		});
-		for (let selection of editor.selections){
-			edit.replace(selection,num.toString());
-			num++;
-		}
+		}).then((num)=>{
+			editor.edit((edit)=>{
+				for (let selection of editor.selections){
+					edit.replace(selection,num.toString());
+					num++;
+				}
+			});
+		},
+		console.error);
 	});
 	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
 	
