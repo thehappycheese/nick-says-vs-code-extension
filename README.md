@@ -45,9 +45,9 @@ Please see the [Change Log](./CHANGELOG.md) for recent changes.
 3. Press `Ctrl+Shift+P` to open the command search
 4. Search for
    - `Number Cursors from Zero` OR
-   - `Number Cursors from One`
+   - `Number Cursors from Arbitrary`
 5. Numbers will be inserted at each cursor
-   - starting at `0` or `1` respectively
+   - starting at `0` or a prompt will ask for the starting number respectively
    - *ordered in the same way that cursors were created*
 
 ### 2.4. Command: `Seek to Next Occurrence`

@@ -20,16 +20,20 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable_number_cursors_from_zero);
 
-	let disposable_number_cursors_from_one = vscode
+	let disposable_number_cursors_from_arbitrary = vscode
 			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_one', (editor, edit, args) => {
-		let num=1;
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary', (editor, edit, args) => {
+		let num= vscode.window.showInputBox({
+			placeHolder: "1",
+			prompt: "Starting number",
+			value: 1
+		});
 		for (let selection of editor.selections){
 			edit.replace(selection,num.toString());
 			num++;
 		}
 	});
-	context.subscriptions.push(disposable_number_cursors_from_one);
+	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
 	
 	let disposable_left_align_cursors_using_spaces = vscode
 			.commands
