@@ -75,9 +75,13 @@ export function activate(context: vscode.ExtensionContext) {
 								num+=step;
 							}
 						});
+					}else{
+						console.error(step);
 					}
 				},
 				console.error);
+			}else{
+				console.error(num);
 			}
 		},
 		console.error);
