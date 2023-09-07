@@ -54,3 +54,4 @@ this file.
 ### Added
 
 - `nicksays.number_cursors_from_arbitrary` (`Number cursors from ...`)
+- `nicksays.number_cursors_from_arbitrary_with_step` (`Number cursors from ... choosing steps`)

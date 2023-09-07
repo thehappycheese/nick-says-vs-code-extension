@@ -51,6 +51,36 @@ export function activate(context: vscode.ExtensionContext) {
 		console.error);
 	});
 	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
+
+	let disposable_number_cursors_from_arbitrary_with_steps = vscode
+			.commands
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_steps', (editor, edit, args) => {
+		vscode.window.showInputBox({
+			placeHolder: "1",
+			prompt: "Starting number",
+			value: 1
+		}).then((num)=>{
+			if(typeof num === 'number' && !Number.isNaN(num)){
+				vscode.window.showInputBox({
+					placeHolder: "1",
+					prompt: "Steps",
+					value: 1
+				}).then((step)=>{
+					if(typeof step === 'number' && !Number.isNaN(step)){
+						editor.edit((edit)=>{
+							for (let selection of editor.selections){
+								edit.replace(selection,num.toString());
+								num+=step;
+							}
+						});
+					}
+				},
+				console.error);
+			}
+		},
+		console.error);
+	});
+	context.subscriptions.push(disposable_number_cursors_from_arbitrary_with_steps);
 	
 	let disposable_left_align_cursors_using_spaces = vscode
 			.commands
