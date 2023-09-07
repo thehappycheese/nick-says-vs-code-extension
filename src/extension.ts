@@ -31,6 +31,27 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable_number_cursors_from_one);
 	
+	let disposable_number_cursors_from_arbitrary = vscode
+			.commands
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary', (editor, edit, args) => {
+		vscode.window.showInputBox({
+			placeHolder: "1",
+			prompt: "Starting number",
+			value: 1
+		}).then((num)=>{
+			if(typeof num === 'number' && !Number.isNaN(num)){
+				editor.edit((edit)=>{
+					for (let selection of editor.selections){
+						edit.replace(selection,num.toString());
+						num++;
+					}
+				});
+			}
+		},
+		console.error);
+	});
+	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
+	
 	let disposable_left_align_cursors_using_spaces = vscode
 			.commands
 			.registerTextEditorCommand('engineernick.multi-cursor-tools.left_align_cursors_using_spaces', (editor, edit, args) => {
