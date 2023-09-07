@@ -54,25 +54,27 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
 
-	let disposable_number_cursors_from_arbitrary_with_steps = vscode
+	let disposable_number_cursors_from_arbitrary_with_step = vscode
 			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_steps', (editor, edit, args) => {
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_step', (editor, edit, args) => {
 		vscode.window.showInputBox({
 			placeHolder: "1",
 			prompt: "Starting number",
 			value: 1
 		}).then((num)=>{
-			if(typeof num === 'number' && !Number.isNaN(num)){
+			if(parseFloat(num).toString() == num){
 				vscode.window.showInputBox({
 					placeHolder: "1",
 					prompt: "Steps",
 					value: 1
 				}).then((step)=>{
-					if(typeof step === 'number' && !Number.isNaN(step)){
+					let currentNum = parseFloat(num);
+					if(parseFloat(step).toString() == step){
+						const stepNum = parseFloat(step);
 						editor.edit((edit)=>{
 							for (let selection of editor.selections){
-								edit.replace(selection,num.toString());
-								num+=step;
+								edit.replace(selection,currentNum.toString());
+								currentNum+=stepNum;
 							}
 						});
 					}else{
@@ -86,7 +88,7 @@ export function activate(context: vscode.ExtensionContext) {
 		},
 		console.error);
 	});
-	context.subscriptions.push(disposable_number_cursors_from_arbitrary_with_steps);
+	context.subscriptions.push(disposable_number_cursors_from_arbitrary_with_step);
 	
 	let disposable_left_align_cursors_using_spaces = vscode
 			.commands
