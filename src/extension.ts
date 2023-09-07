@@ -35,6 +35,8 @@ export function activate(context: vscode.ExtensionContext) {
 						num++;
 					}
 				});
+			}else{
+				console.error(num);
 			}
 		},
 		console.error);
