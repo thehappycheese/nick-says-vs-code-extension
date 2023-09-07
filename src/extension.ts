@@ -39,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 			prompt: "Starting number",
 			value: 1
 		}).then((num)=>{
-			if(typeof num === 'number' && !Number.isNaN(num)){
+			if(parseFloat(num).toString() == num){
 				editor.edit((edit)=>{
 					for (let selection of editor.selections){
 						edit.replace(selection,num.toString());
