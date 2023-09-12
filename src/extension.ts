@@ -44,6 +44,10 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			let num = parseFloat(user_input);
+			if(Math.abs(num) >= Number.MAX_SAFE_INTEGER){
+				vscode.window.showErrorMessage('Number too big. No change made.');
+				return;
+			}
 			if(!(num.toString() === user_input)){
 				vscode.window.showErrorMessage('Wrong number format. No change made.');
 				return;
@@ -71,6 +75,10 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			let num = parseFloat(user_input);
+			if(Math.abs(num) >= Number.MAX_SAFE_INTEGER){
+				vscode.window.showErrorMessage('Number too big. No change made.');
+				return;
+			}
 			if(!(num.toString() === user_input)){
 				vscode.window.showErrorMessage('Wrong number format. No change made.');
 				return;
@@ -85,6 +93,10 @@ export function activate(context: vscode.ExtensionContext) {
 					return;
 				}
 				const step = parseFloat(user_input_step);
+				if(Math.abs(step) >= Number.MAX_SAFE_INTEGER){
+					vscode.window.showErrorMessage('Number too big. No change made.');
+					return;
+				}	
 				if(!(step.toString() === user_input_step)){
 					vscode.window.showErrorMessage('Wrong number format. No change made.');
 					return;
