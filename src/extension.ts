@@ -37,7 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInputBox({
 			placeHolder: "1",
 			prompt: "Starting number",
-			value: 1
+			value: "1"
 		}).then((num)=>{
 			if(parseFloat(num).toString() == num){
 				editor.edit((edit)=>{
