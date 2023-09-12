@@ -44,17 +44,16 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			let num = parseFloat(user_input);
-			if(num.toString() === user_input){
-				editor.edit((edit)=>{
-					for (let selection of editor.selections){
-						edit.replace(selection,num.toString());
-						num++;
-					}
-				});
-			}else{
+			if(!(num.toString() === user_input)){
 				vscode.window.showErrorMessage('Wrong number format. No change made.');
 				return;
 			}
+			editor.edit((edit)=>{
+				for (let selection of editor.selections){
+					edit.replace(selection,num.toString());
+					num++;
+				}
+			});
 		});
 	});
 	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
@@ -72,33 +71,31 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			let num = parseFloat(user_input);
-			if(num.toString() === user_input){
-				vscode.window.showInputBox({
-					placeHolder: "1",
-					prompt: "Steps",
-					value: "1"
-				}).then(user_input_step=>{
-					if (user_input_step === undefined || user_input_step === "") {
-						vscode.window.showErrorMessage('A number was required. No change made.');
-						return;
-					}
-					const step = parseFloat(user_input_step);
-					if(step.toString() === user_input_step){
-						editor.edit((edit)=>{
-							for (let selection of editor.selections){
-								edit.replace(selection,num.toString());
-								num+=step;
-							}
-						});
-					}else{
-						vscode.window.showErrorMessage('Wrong number format. No change made.');
-						return;
-					}
-				});
-			}else{
+			if(!(num.toString() === user_input)){
 				vscode.window.showErrorMessage('Wrong number format. No change made.');
 				return;
 			}
+			vscode.window.showInputBox({
+				placeHolder: "1",
+				prompt: "Steps",
+				value: "1"
+			}).then(user_input_step=>{
+				if (user_input_step === undefined || user_input_step === "") {
+					vscode.window.showErrorMessage('A number was required. No change made.');
+					return;
+				}
+				const step = parseFloat(user_input_step);
+				if(!(step.toString() === user_input_step)){
+					vscode.window.showErrorMessage('Wrong number format. No change made.');
+					return;
+				}
+				editor.edit((edit)=>{
+					for (let selection of editor.selections){
+						edit.replace(selection,num.toString());
+						num+=step;
+					}
+				});
+			});
 		});
 	});
 	context.subscriptions.push(disposable_number_cursors_from_arbitrary_with_step);
