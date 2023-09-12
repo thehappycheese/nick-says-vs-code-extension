@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			let num = parseFloat(user_input);
-			if(Number.isSafeInteger(num) && num > 0 && num < 10000){
+			if(num.toString() === user_input){
 				editor.edit((edit)=>{
 					for (let selection of editor.selections){
 						edit.replace(selection,num.toString());
@@ -72,7 +72,7 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 			let num = parseFloat(user_input);
-			if(Number.isSafeInteger(num) && num > 0 && num < 10000){
+			if(num.toString() === user_input){
 				vscode.window.showInputBox({
 					placeHolder: "1",
 					prompt: "Steps",
@@ -83,7 +83,7 @@ export function activate(context: vscode.ExtensionContext) {
 						return;
 					}
 					const step = parseFloat(user_input_step);
-					if(Number.isSafeInteger(step) && step > 0 && step < 10000){
+					if(step.toString() === user_input_step){
 						editor.edit((edit)=>{
 							for (let selection of editor.selections){
 								edit.replace(selection,num.toString());
