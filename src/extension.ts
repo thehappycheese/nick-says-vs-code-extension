@@ -39,18 +39,21 @@ export function activate(context: vscode.ExtensionContext) {
 			prompt: "Starting number",
 			value: "1"
 		}).then(user_input => {
-                        if (user_input === undefined || user_input === "") {
-                            vscode.window.showErrorMessage('A number was required. No changes made.');
-                            return
-                        }
-                        let num = parseFloat(user_input);
-                        if(Number.isSafeInteger(num) && num > 0 && num < 10000){
+			if (user_input === undefined || user_input === "") {
+				vscode.window.showErrorMessage('A number was required. No change made.');
+				return;
+			}
+			let num = parseFloat(user_input);
+			if(Number.isSafeInteger(num) && num > 0 && num < 10000){
 				editor.edit((edit)=>{
 					for (let selection of editor.selections){
 						edit.replace(selection,num.toString());
 						num++;
 					}
 				});
+			}else{
+				vscode.window.showErrorMessage('Wrong number format. No change made.');
+				return;
 			}
 		});
 	});
@@ -62,33 +65,41 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInputBox({
 			placeHolder: "1",
 			prompt: "Starting number",
-			value: 1
-		}).then((num)=>{
-			if(parseFloat(num).toString() == num){
+			value: "1"
+		}).then(user_input=>{
+			if (user_input === undefined || user_input === "") {
+				vscode.window.showErrorMessage('A number was required. No change made.');
+				return;
+			}
+			let num = parseFloat(user_input);
+			if(Number.isSafeInteger(num) && num > 0 && num < 10000){
 				vscode.window.showInputBox({
 					placeHolder: "1",
 					prompt: "Steps",
-					value: 1
-				}).then((step)=>{
-					let currentNum = parseFloat(num);
-					if(parseFloat(step).toString() == step){
-						const stepNum = parseFloat(step);
+					value: "1"
+				}).then(user_input_step=>{
+					if (user_input_step === undefined || user_input_step === "") {
+						vscode.window.showErrorMessage('A number was required. No change made.');
+						return;
+					}
+					const step = parseFloat(user_input_step);
+					if(Number.isSafeInteger(step) && step > 0 && step < 10000){
 						editor.edit((edit)=>{
 							for (let selection of editor.selections){
-								edit.replace(selection,currentNum.toString());
-								currentNum+=stepNum;
+								edit.replace(selection,num.toString());
+								num+=step;
 							}
 						});
 					}else{
-						console.error(step);
+						vscode.window.showErrorMessage('Wrong number format. No change made.');
+						return;
 					}
-				},
-				console.error);
+				});
 			}else{
-				console.error(num);
+				vscode.window.showErrorMessage('Wrong number format. No change made.');
+				return;
 			}
-		},
-		console.error);
+		});
 	});
 	context.subscriptions.push(disposable_number_cursors_from_arbitrary_with_step);
 	
