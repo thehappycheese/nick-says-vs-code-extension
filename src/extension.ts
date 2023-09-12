@@ -38,19 +38,21 @@ export function activate(context: vscode.ExtensionContext) {
 			placeHolder: "1",
 			prompt: "Starting number",
 			value: "1"
-		}).then((num)=>{
-			if(parseFloat(num).toString() == num){
+		}).then(user_input => {
+                        if (user_input === undefined || user_input === "") {
+                            vscode.window.showErrorMessage('A number was required. No changes made.');
+                            return
+                        }
+                        let num = parseFloat(user_input);
+                        if(Number.isSafeInteger(num) && num > 0 && num < 10000){
 				editor.edit((edit)=>{
 					for (let selection of editor.selections){
 						edit.replace(selection,num.toString());
 						num++;
 					}
 				});
-			}else{
-				console.error(num);
 			}
-		},
-		console.error);
+		});
 	});
 	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
 
