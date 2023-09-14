@@ -48,3 +48,10 @@ this file.
 
 - renamed `nicksays.left_align_cursors_using_spaces`
 - renamed `Number Cursors from Zero`
+
+## [1.x.x] - 2023-x-x
+
+### Added
+
+- `nicksays.number_cursors_from_arbitrary` (`Number cursors from ...`)
+- `nicksays.number_cursors_from_arbitrary_with_step` (`Number cursors from ... choosing steps`)

@@ -45,9 +45,11 @@ Please see the [Change Log](./CHANGELOG.md) for recent changes.
 3. Press `Ctrl+Shift+P` to open the command search
 4. Search for
    - `Number Cursors from Zero` OR
-   - `Number Cursors from One`
+   - `Number Cursors from One` OR
+   - `Number Cursors from ...` OR
+   - `Number Cursors from ... choosing steps`
 5. Numbers will be inserted at each cursor
-   - starting at `0` or `1` respectively
+   - starting at `0` or `1` respectively or prompting for the starting number and step (increment number) respectively
    - *ordered in the same way that cursors were created*
 
 ### 2.4. Command: `Seek to Next Occurrence`

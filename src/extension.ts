@@ -31,6 +31,87 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable_number_cursors_from_one);
 	
+	let disposable_number_cursors_from_arbitrary = vscode
+			.commands
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary', (editor, edit, args) => {
+		vscode.window.showInputBox({
+			placeHolder: "1",
+			prompt: "Starting number",
+			value: "1"
+		}).then(user_input => {
+			if (user_input === undefined || user_input === "") {
+				vscode.window.showErrorMessage('A number was required. No change made.');
+				return;
+			}
+			let num = parseFloat(user_input);
+			if(Math.abs(num) >= Number.MAX_SAFE_INTEGER){
+				vscode.window.showErrorMessage('Number too big. No change made.');
+				return;
+			}
+			if(!(num.toString() === user_input)){
+				vscode.window.showErrorMessage('Wrong number format. No change made.');
+				return;
+			}
+			editor.edit((edit)=>{
+				for (let selection of editor.selections){
+					edit.replace(selection,num.toString());
+					num++;
+				}
+			});
+		});
+	});
+	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
+
+	let disposable_number_cursors_from_arbitrary_with_step = vscode
+			.commands
+			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_step', (editor, edit, args) => {
+		vscode.window.showInputBox({
+			placeHolder: "1",
+			prompt: "Starting number",
+			value: "1"
+		}).then(user_input=>{
+			if (user_input === undefined || user_input === "") {
+				vscode.window.showErrorMessage('A number was required. No change made.');
+				return;
+			}
+			let num = parseFloat(user_input);
+			if(Math.abs(num) >= Number.MAX_SAFE_INTEGER){
+				vscode.window.showErrorMessage('Number too big. No change made.');
+				return;
+			}
+			if(!(num.toString() === user_input)){
+				vscode.window.showErrorMessage('Wrong number format. No change made.');
+				return;
+			}
+			vscode.window.showInputBox({
+				placeHolder: "1",
+				prompt: "Steps",
+				value: "1"
+			}).then(user_input_step=>{
+				if (user_input_step === undefined || user_input_step === "") {
+					vscode.window.showErrorMessage('A number was required. No change made.');
+					return;
+				}
+				const step = parseFloat(user_input_step);
+				if(Math.abs(step) >= Number.MAX_SAFE_INTEGER){
+					vscode.window.showErrorMessage('Number too big. No change made.');
+					return;
+				}	
+				if(!(step.toString() === user_input_step)){
+					vscode.window.showErrorMessage('Wrong number format. No change made.');
+					return;
+				}
+				editor.edit((edit)=>{
+					for (let selection of editor.selections){
+						edit.replace(selection,num.toString());
+						num+=step;
+					}
+				});
+			});
+		});
+	});
+	context.subscriptions.push(disposable_number_cursors_from_arbitrary_with_step);
+	
 	let disposable_left_align_cursors_using_spaces = vscode
 			.commands
 			.registerTextEditorCommand('engineernick.multi-cursor-tools.left_align_cursors_using_spaces', (editor, edit, args) => {

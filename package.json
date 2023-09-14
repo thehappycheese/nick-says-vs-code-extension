@@ -19,6 +19,8 @@
 	"activationEvents": [
 		"onCommand:engineernick.multi-cursor-tools.number_cursors_from_zero",
 		"onCommand:engineernick.multi-cursor-tools.number_cursors_from_one",
+		"onCommand:engineernick.multi-cursor-tools.number_cursors_from_arbitrary",
+		"onCommand:engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_step",
 		"onCommand:engineernick.multi-cursor-tools.left_align_cursors_using_spaces",
 		"onCommand:engineernick.multi-cursor-tools.right_align_cursors_using_spaces",
 		"onCommand:engineernick.multi-cursor-tools.seek_to_next_occurrence",
@@ -35,6 +37,16 @@
 			{
 				"command": "engineernick.multi-cursor-tools.number_cursors_from_one",
 				"title": "Number Cursors from One",
+				"category": "Multi-Cursor"
+			},
+			{
+				"command": "engineernick.multi-cursor-tools.number_cursors_from_arbitrary",
+				"title": "Number Cursors from ...",
+				"category": "Multi-Cursor"
+			},
+			{
+				"command": "engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_step",
+				"title": "Number Cursors from ... choosing steps",
 				"category": "Multi-Cursor"
 			},
 			{
