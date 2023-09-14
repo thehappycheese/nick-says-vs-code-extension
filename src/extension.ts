@@ -132,7 +132,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let max_column = 0;
 		let max_width  = 0;
 		for (let selection of editor.selections){
-			max_column = Math.max(max_column, get_column(editor, selection.start))
+			max_column = Math.max(max_column, get_column(editor, selection.start));
 			max_width = Math.max(max_width, get_column(editor, selection.end)-get_column(editor, selection.start));
 		}
 		for(let selection of editor.selections){
@@ -157,7 +157,7 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 		if (search_string==="" || search_string===undefined){
 			vscode.window.showErrorMessage('A character string is required, cursors have not been moved');
-			return
+			return;
 		}
 		last_seek_expand_value = search_string;
 		let new_selections:vscode.Selection[] = [];
@@ -171,7 +171,7 @@ export function activate(context: vscode.ExtensionContext) {
 			}else{
 				new_position = selection.end.translate(0, offset);
 			}
-			new_selections.push(new vscode.Selection(new_position, new_position))
+			new_selections.push(new vscode.Selection(new_position, new_position));
 		}
 		editor.selections = new_selections;
 	});
@@ -188,7 +188,7 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 		if (search_string==="" || search_string===undefined){
 			vscode.window.showErrorMessage('A character string is required, cursors have not been moved');
-			return
+			return;
 		}
 		last_seek_expand_value = search_string;
 		let new_selections:vscode.Selection[] = [];
