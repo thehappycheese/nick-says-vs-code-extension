@@ -11,10 +11,13 @@
     "rules": {
         "@typescript-eslint/naming-convention": "warn",
         "@typescript-eslint/semi": "warn",
+        "@typescript-eslint/camelcase": "off",
+        "@typescript-eslint/naming-convention": "off",
         "curly": "warn",
         "eqeqeq": "warn",
         "no-throw-literal": "warn",
-        "semi": "off"
+        "semi": "off",
+        "camelcase": "off"
     },
     "ignorePatterns": [
         "out",
