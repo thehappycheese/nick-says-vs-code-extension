@@ -1,224 +1,60 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { get_column } from './get_column';
+import { number_cursors_from_arbitrary, number_cursors_from_arbitrary_with_step, number_cursors_from_one, number_cursors_from_zero } from './commands/number_cursors';
+import { left_align_cursors_using_spaces, right_align_cursors_using_spaces } from './commands/align_cursors';
+import { expand_to_next_occurrence, seek_to_next_occurrence } from './commands/seek_selections';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+let registerTextEditorCommand = vscode.commands.registerTextEditorCommand;
+
 export function activate(context: vscode.ExtensionContext) {
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable_number_cursors_from_zero = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_zero', (editor, edit, args) => {
-		let num=0;
-		for (let selection of editor.selections){
-			edit.replace(selection,num.toString());
-			num++;
-		}
-	});
-	context.subscriptions.push(disposable_number_cursors_from_zero);
+    
+    let register_and_subscribe:typeof vscode.commands.registerTextEditorCommand = (command_name, command_function) => {
+        let disposable = registerTextEditorCommand(command_name, command_function);
+        context.subscriptions.push(disposable);
+        return disposable;
+    }
 
-	let disposable_number_cursors_from_one = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_one', (editor, edit, args) => {
-		let num=1;
-		for (let selection of editor.selections){
-			edit.replace(selection,num.toString());
-			num++;
-		}
-	});
-	context.subscriptions.push(disposable_number_cursors_from_one);
-	
-	let disposable_number_cursors_from_arbitrary = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary', (editor, edit, args) => {
-		vscode.window.showInputBox({
-			placeHolder: "1",
-			prompt: "Starting number",
-			value: "1"
-		}).then(user_input => {
-			if (user_input === undefined || user_input === "") {
-				vscode.window.showErrorMessage('A number was required. No change made.');
-				return;
-			}
-			let num = parseFloat(user_input);
-			if(Math.abs(num) >= Number.MAX_SAFE_INTEGER){
-				vscode.window.showErrorMessage('Number too big. No change made.');
-				return;
-			}
-			if(!(num.toString() === user_input)){
-				vscode.window.showErrorMessage('Wrong number format. No change made.');
-				return;
-			}
-			editor.edit((edit)=>{
-				for (let selection of editor.selections){
-					edit.replace(selection,num.toString());
-					num++;
-				}
-			});
-		});
-	});
-	context.subscriptions.push(disposable_number_cursors_from_arbitrary);
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.number_cursors_from_zero',
+        number_cursors_from_zero
+    );
 
-	let disposable_number_cursors_from_arbitrary_with_step = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_step', (editor, edit, args) => {
-		vscode.window.showInputBox({
-			placeHolder: "1",
-			prompt: "Starting number",
-			value: "1"
-		}).then(user_input=>{
-			if (user_input === undefined || user_input === "") {
-				vscode.window.showErrorMessage('A number was required. No change made.');
-				return;
-			}
-			let num = parseFloat(user_input);
-			if(Math.abs(num) >= Number.MAX_SAFE_INTEGER){
-				vscode.window.showErrorMessage('Number too big. No change made.');
-				return;
-			}
-			if(!(num.toString() === user_input)){
-				vscode.window.showErrorMessage('Wrong number format. No change made.');
-				return;
-			}
-			vscode.window.showInputBox({
-				placeHolder: "1",
-				prompt: "Steps",
-				value: "1"
-			}).then(user_input_step=>{
-				if (user_input_step === undefined || user_input_step === "") {
-					vscode.window.showErrorMessage('A number was required. No change made.');
-					return;
-				}
-				const step = parseFloat(user_input_step);
-				if(Math.abs(step) >= Number.MAX_SAFE_INTEGER){
-					vscode.window.showErrorMessage('Number too big. No change made.');
-					return;
-				}	
-				if(!(step.toString() === user_input_step)){
-					vscode.window.showErrorMessage('Wrong number format. No change made.');
-					return;
-				}
-				editor.edit((edit)=>{
-					for (let selection of editor.selections){
-						edit.replace(selection,num.toString());
-						num+=step;
-					}
-				});
-			});
-		});
-	});
-	context.subscriptions.push(disposable_number_cursors_from_arbitrary_with_step);
-	
-	let disposable_left_align_cursors_using_spaces = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.left_align_cursors_using_spaces', (editor, edit, args) => {
-		let max_column=0;
-		for (let selection of editor.selections){
-			max_column = Math.max(max_column, get_column(editor, selection.start));
-		}
-		
-		for(let selection of editor.selections){
-			edit.insert(selection.start, ''.padEnd(max_column-get_column(editor, selection.start)));
-		}
-	});
-	context.subscriptions.push(disposable_left_align_cursors_using_spaces);
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.number_cursors_from_one',
+        number_cursors_from_one
+    );
 
-	let disposable_right_align_cursors_using_spaces = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.right_align_cursors_using_spaces', (editor, edit, args) => {
-		let max_column = 0;
-		let max_width  = 0;
-		for (let selection of editor.selections){
-			max_column = Math.max(max_column, get_column(editor, selection.start));
-			max_width = Math.max(max_width, get_column(editor, selection.end)-get_column(editor, selection.start));
-		}
-		for(let selection of editor.selections){
-			let selection_width = get_column(editor, selection.end)-get_column(editor, selection.start);
-			edit.insert(selection.start, ''.padEnd(max_column-get_column(editor, selection.start) + max_width - selection_width));
-		}
-	});
-	context.subscriptions.push(disposable_right_align_cursors_using_spaces);
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.number_cursors_from_arbitrary',
+        number_cursors_from_arbitrary
+    );
 
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.number_cursors_from_arbitrary_with_step',
+        number_cursors_from_arbitrary_with_step
+    );
 
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.left_align_cursors_using_spaces',
+        left_align_cursors_using_spaces
+    );
 
-	let last_seek_expand_value = "";
-
-	let disposable_seek_to_next_occurrence = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.seek_to_next_occurrence', async (editor, edit, args) => {
-		
-		const search_string = await vscode.window.showInputBox({
-			placeHolder: "characters to search for",
-			prompt: "Move cursors forward to the next occurrence of a search string on a line. Move to end if none found.",
-			value: last_seek_expand_value,
-		});
-		if (search_string==="" || search_string===undefined){
-			vscode.window.showErrorMessage('A character string is required, cursors have not been moved');
-			return;
-		}
-		last_seek_expand_value = search_string;
-		let new_selections:vscode.Selection[] = [];
-		for (let selection of editor.selections){
-			let text_line = editor.document.lineAt(selection.end.line);
-			let offset = text_line.text.slice(selection.end.character).indexOf(search_string);
-			let new_position:vscode.Position;
-			if (offset===-1){
-				new_position = editor.document.lineAt(selection.end.line).range.end;
-				
-			}else{
-				new_position = selection.end.translate(0, offset);
-			}
-			new_selections.push(new vscode.Selection(new_position, new_position));
-		}
-		editor.selections = new_selections;
-	});
-	context.subscriptions.push(disposable_seek_to_next_occurrence);
-
-	let disposable_expand_to_next_occurrence = vscode
-			.commands
-			.registerTextEditorCommand('engineernick.multi-cursor-tools.expand_to_next_occurrence', async (editor, edit, args) => {
-		
-		const search_string = await vscode.window.showInputBox({
-			placeHolder: "characters to search for",
-			prompt: "Expand selection forward from cursors to the next occurrence of a search string on a line. Move to end if none found.",
-			value: last_seek_expand_value,
-		});
-		if (search_string==="" || search_string===undefined){
-			vscode.window.showErrorMessage('A character string is required, cursors have not been moved');
-			return;
-		}
-		last_seek_expand_value = search_string;
-		let new_selections:vscode.Selection[] = [];
-		for (let selection of editor.selections){
-			let text_line = editor.document.lineAt(selection.end.line);
-			let offset = text_line.text.slice(selection.end.character).indexOf(search_string);
-			if (offset===-1){
-				new_selections.push(
-					new vscode.Selection(
-						selection.start,
-						editor.document.lineAt(selection.end.line).range.end
-					)
-				);
-			}else{
-				new_selections.push(
-					new vscode.Selection(
-						selection.start,
-						selection.end.translate(0, offset)
-					)
-				);
-			}
-		}
-		editor.selections = new_selections;
-	});
-	context.subscriptions.push(disposable_expand_to_next_occurrence);
-	
-
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.right_align_cursors_using_spaces',
+        right_align_cursors_using_spaces
+    );
+    
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.seek_to_next_occurrence',
+        seek_to_next_occurrence
+    );
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.expand_to_next_occurrence',
+        expand_to_next_occurrence
+    );
 
 }
 
-
-// this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+    // pass
+}
