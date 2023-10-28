@@ -9,6 +9,7 @@ Use multi-cursor selections to do more!
   - [2.3. Command: `Number Cursors from ...`](#23-command-number-cursors-from-)
   - [2.4. Command: `Seek to Next Occurrence`](#24-command-seek-to-next-occurrence)
   - [2.5. Command: `Expand to Next Occurrence`](#25-command-expand-to-next-occurrence)
+  - [2.6. Command: `Newline Above` - `ctrl+K ctrl+shift+enter`](#26-command-newline-above---ctrlk-ctrlshiftenter)
 
 > Formally named "nick_says" then "Multi-Cursor-Align", now "Multi-Cursor
 > Tools".
@@ -61,5 +62,11 @@ Prompts for a search string, then moves current selection(s) forwards to the nex
 ### 2.5. Command: `Expand to Next Occurrence`
 
 Prompts for a search string, then expands current selection(s) forwards to before the next occurrence of the search string, staying on the same line as the current selection(s) end.
+
+*TODO: screencapture*
+
+### 2.6. Command: `Newline Above` - `ctrl+K ctrl+shift+enter`
+
+Similar to the built-in 'Line Above' command, but it brings the text after the cursor along.
 
 *TODO: screencapture*
