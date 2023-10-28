@@ -3,6 +3,8 @@ import { get_column } from "../get_column";
 
 
 /**
+ * Similar to the built-in 'Insert Line Above' but it brings the text after the cursor with.
+ * 
  * copy the text to the right of the start of the selection
  * to the line above the line where the selection starts
  * collapse the selection to the start of the line above
@@ -10,7 +12,7 @@ import { get_column } from "../get_column";
  * internally this will be implemented as a normal insertion of
  * newlines, followed by a swap;
  */
-export function newline_above(editor: TextEditor, edit: TextEditorEdit, ...args: any[]) {
+export function insert_line_above_sticky(editor: TextEditor, edit: TextEditorEdit, ...args: any[]) {
     
     // Sort selections in reverse order based on their start line
     const selections = editor.selections.sort((a, b) => b.start.line - a.start.line);

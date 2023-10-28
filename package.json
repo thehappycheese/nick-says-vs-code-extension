@@ -25,13 +25,13 @@
 		"onCommand:engineernick.multi-cursor-tools.right_align_cursors_using_spaces",
 		"onCommand:engineernick.multi-cursor-tools.seek_to_next_occurrence",
 		"onCommand:engineernick.multi-cursor-tools.expand_to_next_occurrence",
-        "onCommand:engineernick.multi-cursor-tools.newline_above"
+        "onCommand:engineernick.multi-cursor-tools.insert_line_above_sticky"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
         "keybindings":[
             {
-                "command": "engineernick.multi-cursor-tools.newline_above",
+                "command": "engineernick.multi-cursor-tools.insert_line_above_sticky",
                 "key": "ctrl+k ctrl+shift+enter",
                 "mac": "cmd+k cmd+shift+enter",
                 "when": "editorTextFocus"
@@ -79,8 +79,8 @@
 				"category": "Multi-Cursor"
 			},
 			{
-				"command": "engineernick.multi-cursor-tools.newline_above",
-				"title": "Newline above",
+				"command": "engineernick.multi-cursor-tools.insert_line_above_sticky",
+				"title": "Sticky Line Above",
 				"category": "Multi-Cursor"
 			}
 		]
