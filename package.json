@@ -9,7 +9,7 @@
 	},
 	"license": "MIT",
 	"icon": "main_icon.png",
-	"version": "1.3.0",
+	"version": "1.4.0",
 	"engines": {
 		"vscode": "^1.59.0"
 	},
@@ -25,7 +25,8 @@
 		"onCommand:engineernick.multi-cursor-tools.right_align_cursors_using_spaces",
 		"onCommand:engineernick.multi-cursor-tools.seek_to_next_occurrence",
 		"onCommand:engineernick.multi-cursor-tools.expand_to_next_occurrence",
-        "onCommand:engineernick.multi-cursor-tools.insert_line_above_sticky"
+        "onCommand:engineernick.multi-cursor-tools.insert_line_above_sticky",
+        "onCommand:engineernick.multi-cursor-tools.reverse_and_collect_lines"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -34,6 +35,12 @@
                 "command": "engineernick.multi-cursor-tools.insert_line_above_sticky",
                 "key": "ctrl+k ctrl+shift+enter",
                 "mac": "cmd+k cmd+shift+enter",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "engineernick.multi-cursor-tools.reverse_and_collect_lines",
+                "key": "ctrl+k ctrl+shift+r",
+                "mac": "cmd+k cmd+shift+r",
                 "when": "editorTextFocus"
             }
         ],
@@ -81,6 +88,11 @@
 			{
 				"command": "engineernick.multi-cursor-tools.insert_line_above_sticky",
 				"title": "Sticky Line Above",
+				"category": "Multi-Cursor"
+			},
+			{
+				"command": "engineernick.multi-cursor-tools.reverse_and_collect_lines",
+				"title": "Reverse and Collect Lines",
 				"category": "Multi-Cursor"
 			}
 		]

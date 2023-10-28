@@ -10,6 +10,7 @@ Use multi-cursor selections to do more!
   - [2.4. Command: `Seek to Next Occurrence`](#24-command-seek-to-next-occurrence)
   - [2.5. Command: `Expand to Next Occurrence`](#25-command-expand-to-next-occurrence)
   - [2.6. Command: `Sticky Line Above` - `ctrl+K ctrl+shift+enter`](#26-command-sticky-line-above---ctrlk-ctrlshiftenter)
+  - [2.7. Command: `Reverse and Collect Lines` - `ctrl+K ctrl+shift+R`](#27-command-reverse-and-collect-lines---ctrlk-ctrlshiftr)
 
 > Formally named "nick_says" then "Multi-Cursor-Align", now "Multi-Cursor
 > Tools".
@@ -63,7 +64,7 @@ Please see the [Change Log](./CHANGELOG.md) for recent changes.
 Prompts for a search string, then moves current selection(s) forwards to the
 next occurrence, staying on the same line as the current selection(s) end.
 
-*TODO: screencapture*
+> Does NOT use regex patterns
 
 ### 2.5. Command: `Expand to Next Occurrence`
 
@@ -71,11 +72,13 @@ Prompts for a search string, then expands current selection(s) forwards to
 before the next occurrence of the search string, staying on the same line as the
 current selection(s) end.
 
-*TODO: screencapture*
+> Does NOT use regex patterns
 
 ### 2.6. Command: `Sticky Line Above` - `ctrl+K ctrl+shift+enter`
 
-Similar to the built-in 'Line Above' command, but it brings the text after the
+Similar to the built-in `Line Above`` command, but it brings the text after the
 cursor along.
 
-*TODO: screencapture*
+### 2.7. Command: `Reverse and Collect Lines` - `ctrl+K ctrl+shift+R`
+
+Reverse selected lines, then remove newline characters.
