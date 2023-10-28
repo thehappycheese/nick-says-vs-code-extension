@@ -1,4 +1,4 @@
-import { Selection, TextEditor, TextEditorEdit } from "vscode";
+import { Position, Selection, TextEditor, TextEditorEdit } from "vscode";
 import { get_column } from "../get_column";
 
 
@@ -11,25 +11,56 @@ import { get_column } from "../get_column";
  *
  * internally this will be implemented as a normal insertion of
  * newlines, followed by a swap;
- */
+*/
 export function insert_line_above_sticky(editor: TextEditor, edit: TextEditorEdit, ...args: any[]) {
-    
-    // Sort selections in reverse order based on their start line
-    const selections = editor.selections.sort((a, b) => b.start.line - a.start.line);
-    const final_selections = [];
-    for (let selection of selections) {
-        let line_text = editor.document.lineAt(selection.start.line).text
-        let line_text_before_selection_start = line_text.slice(0, selection.start.character)
-        let line_text_after_selection_start = line_text.slice(selection.start.character)
-        console.log(line_text)
-        console.log(editor.document.lineAt(selection.start.line).range)
+    // 1. Group and Sort Selections
+    const groupedSelections: { [line: number]: Selection[] } = {};
+    editor.selections.forEach(selection => {
+        const line = selection.start.line;
+        if (!groupedSelections[line]) {
+            groupedSelections[line] = [];
+        }
+        groupedSelections[line].push(selection);
+    });
 
-        edit.replace(
-            editor.document.lineAt(selection.start.line).range,
-            line_text_after_selection_start + "\n" + line_text_before_selection_start
-        )
-        const newPosition = selection.start.with({ character: 0 });
-        final_selections.push(new Selection(newPosition, newPosition));
-    }
-    editor.selections = final_selections;
+    Object.values(groupedSelections).forEach(selections => {
+        selections.sort((a, b) => a.start.character - b.start.character);
+    });
+
+    // Sort lines in reverse order to handle edits correctly
+    const lines = Object.keys(groupedSelections).map(Number).sort((a, b) => b - a);
+
+    // 2. Process Each Line
+    const newSelections: Selection[] = [];
+    lines.forEach(line => {
+        const selections = groupedSelections[line];
+        const lineText = editor.document.lineAt(line).text;
+        const segments = split_by_selections(lineText, selections);
+        segments.reverse()
+        const newText = segments.join('\n');
+        edit.replace(editor.document.lineAt(line).range, newText);
+
+        // 3. Update Selections
+        
+        newSelections.push(selections[0]);
+    });
+
+    editor.selections = newSelections;
+}
+
+function split_by_selections(text: string, selections: Selection[]): string[] {
+    const segments: string[] = [];
+    let lastEnd = 0;
+
+    selections.forEach(selection => {
+        const start = selection.start.character;
+        const segment = text.slice(lastEnd, start);
+        segments.push(segment);
+        lastEnd = start;
+    });
+
+    // Add the remaining text after the last selection
+    segments.push(text.slice(lastEnd));
+
+    return segments;
 }
