@@ -76,7 +76,7 @@ current selection(s) end.
 
 ### 2.6. Command: `Sticky Line Above` - `ctrl+K ctrl+shift+enter`
 
-Similar to the built-in `Line Above`` command, but it brings the text after the
+Similar to the built-in `Line Above` command, but it brings the text after the
 cursor along.
 
 ### 2.7. Command: `Reverse and Collect Lines` - `ctrl+K ctrl+shift+R`
