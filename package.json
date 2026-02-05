@@ -9,7 +9,7 @@
 	},
 	"license": "MIT",
 	"icon": "main_icon.png",
-	"version": "1.4.1",
+	"version": "1.5.0",
 	"engines": {
 		"vscode": "^1.59.0"
 	},
@@ -26,7 +26,9 @@
 		"onCommand:engineernick.multi-cursor-tools.seek_to_next_occurrence",
 		"onCommand:engineernick.multi-cursor-tools.expand_to_next_occurrence",
         "onCommand:engineernick.multi-cursor-tools.insert_line_above_sticky",
-        "onCommand:engineernick.multi-cursor-tools.reverse_and_collect_lines"
+        "onCommand:engineernick.multi-cursor-tools.reverse_and_collect_lines",
+        "onCommand:engineernick.multi-cursor-tools.number_cursors_alternate",
+        "onCommand:engineernick.multi-cursor-tools.number_cursors_alternate_from"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -94,8 +96,28 @@
 				"command": "engineernick.multi-cursor-tools.reverse_and_collect_lines",
 				"title": "Reverse and Collect Lines",
 				"category": "Multi-Cursor"
+			},
+			{
+				"command": "engineernick.multi-cursor-tools.number_cursors_alternate",
+				"title": "Number Cursors (alternate formats)",
+				"category": "Multi-Cursor"
+			},
+			{
+				"command": "engineernick.multi-cursor-tools.number_cursors_alternate_from",
+				"title": "Number Cursors (alternate formats) from...",
+				"category": "Multi-Cursor"
 			}
-		]
+		],
+		"configuration": {
+			"title": "Multi-Cursor Tools",
+			"properties": {
+				"multiCursorTools.paddingEnabled": {
+					"type": "boolean",
+					"default": false,
+					"description": "Automatically pad numbers with leading zeros based on total selection count (e.g., 01-15 instead of 1-15)"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
