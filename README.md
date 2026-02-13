@@ -7,10 +7,12 @@ Use multi-cursor selections to do more!
   - [2.1. Command: `Left Align`](#21-command-left-align)
   - [2.2. Command: `Right Align`](#22-command-right-align)
   - [2.3. Command: `Number Cursors from ...`](#23-command-number-cursors-from-)
-  - [2.4. Command: `Seek to Next Occurrence`](#24-command-seek-to-next-occurrence)
-  - [2.5. Command: `Expand to Next Occurrence`](#25-command-expand-to-next-occurrence)
-  - [2.6. Command: `Sticky Line Above` - `ctrl+K ctrl+shift+enter`](#26-command-sticky-line-above---ctrlk-ctrlshiftenter)
-  - [2.7. Command: `Reverse and Collect Lines` - `ctrl+K ctrl+shift+R`](#27-command-reverse-and-collect-lines---ctrlk-ctrlshiftr)
+  - [2.4. Command: `Number Cursors (alternate formats)`](#24-command-number-cursors-alternate-formats)
+  - [2.5. Command: `Seek to Next Occurrence`](#25-command-seek-to-next-occurrence)
+  - [2.6. Command: `Expand to Next Occurrence`](#26-command-expand-to-next-occurrence)
+  - [2.7. Command: `Sticky Line Above` - `ctrl+K ctrl+shift+enter`](#27-command-sticky-line-above---ctrlk-ctrlshiftenter)
+  - [2.8. Command: `Reverse and Collect Lines` - `ctrl+K ctrl+shift+R`](#28-command-reverse-and-collect-lines---ctrlk-ctrlshiftr)
+- [3. Settings](#3-settings)
 
 > Formally named "nick_says" then "Multi-Cursor-Align", now "Multi-Cursor
 > Tools".
@@ -59,14 +61,31 @@ Please see the [Change Log](./CHANGELOG.md) for recent changes.
      and step (increment number) respectively
    - *ordered in the same way that cursors were created*
 
-### 2.4. Command: `Seek to Next Occurrence`
+### 2.4. Command: `Number Cursors (alternate formats)`
+
+Number selections using letters or roman numerals instead of decimal numbers.
+
+1. Place multiple cursors
+2. Press `Ctrl+Shift+P` and search for `Number Cursors (alternate formats)`
+3. Select a format:
+   - `a, b, c...` - lowercase letters
+   - `A, B, C...` - uppercase letters
+   - `i, ii, iii...` - lowercase roman numerals
+   - `I, II, III...` - uppercase roman numerals
+
+Use `Number Cursors (alternate formats) from...` to choose a custom starting
+point (e.g., start from `c` or from `5` for roman numerals).
+
+> **Note:** Letters are limited to a-z (26 items). Roman numerals support 1-3999.
+
+### 2.5. Command: `Seek to Next Occurrence`
 
 Prompts for a search string, then moves current selection(s) forwards to the
 next occurrence, staying on the same line as the current selection(s) end.
 
 > Does NOT use regex patterns
 
-### 2.5. Command: `Expand to Next Occurrence`
+### 2.6. Command: `Expand to Next Occurrence`
 
 Prompts for a search string, then expands current selection(s) forwards to
 before the next occurrence of the search string, staying on the same line as the
@@ -74,11 +93,25 @@ current selection(s) end.
 
 > Does NOT use regex patterns
 
-### 2.6. Command: `Sticky Line Above` - `ctrl+K ctrl+shift+enter`
+### 2.7. Command: `Sticky Line Above` - `ctrl+K ctrl+shift+enter`
 
 Similar to the built-in `Line Above` command, but it brings the text after the
 cursor along.
 
-### 2.7. Command: `Reverse and Collect Lines` - `ctrl+K ctrl+shift+R`
+### 2.8. Command: `Reverse and Collect Lines` - `ctrl+K ctrl+shift+R`
 
 Reverse selected lines, then remove newline characters.
+
+## 3. Settings
+
+### 3.1. `multiCursorTools.paddingEnabled`
+
+Enable automatic zero-padding for decimal numbering commands.
+
+```json
+"multiCursorTools.paddingEnabled": true
+```
+
+With this setting enabled, numbering 15 selections will produce `01, 02, 03...
+15` instead of `1, 2, 3... 15`. This is useful for maintaining sort order in
+file names or list items.

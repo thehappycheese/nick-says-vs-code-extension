@@ -5,6 +5,7 @@ import { left_align_cursors_using_spaces, right_align_cursors_using_spaces } fro
 import { expand_to_next_occurrence, seek_to_next_occurrence } from './commands/seek_selections';
 import { insert_line_above_sticky } from './commands/insert_line_above_sticky';
 import { reverse_and_collect_lines } from './commands/reverse_and_collect_lines';
+import { number_cursors_alternate, number_cursors_alternate_from } from './commands/number_cursors_alternate';
 
 let registerTextEditorCommand = vscode.commands.registerTextEditorCommand;
 
@@ -63,6 +64,16 @@ export function activate(context: vscode.ExtensionContext) {
     register_and_subscribe(
         'engineernick.multi-cursor-tools.reverse_and_collect_lines',
         reverse_and_collect_lines
+    );
+
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.number_cursors_alternate',
+        number_cursors_alternate
+    );
+
+    register_and_subscribe(
+        'engineernick.multi-cursor-tools.number_cursors_alternate_from',
+        number_cursors_alternate_from
     );
 
 }

@@ -5,6 +5,19 @@ this file.
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-02-05
+
+### Added
+
+- New command: `Number Cursors (alternate formats)` with support for:
+  - Lowercase letters (a, b, c...)
+  - Uppercase letters (A, B, C...)
+  - Lowercase roman numerals (i, ii, iii...)
+  - Uppercase roman numerals (I, II, III...)
+- New command: `Number Cursors (alternate formats) from...` to choose a custom
+  starting point for letters or roman numerals
+- New setting: `multiCursorTools.paddingEnabled` - Optional auto-padding for
+  decimal numbering (e.g., 01-15 instead of 1-15)
 
 ## [1.2.0] - 2023-09-14
 
